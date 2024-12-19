@@ -1,0 +1,1 @@
+# qubership-graphite-remote-adapter
