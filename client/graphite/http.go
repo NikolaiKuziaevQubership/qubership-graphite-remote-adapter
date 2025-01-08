@@ -18,7 +18,7 @@ package graphite
 import (
 	"encoding/json"
 
-	"github.com/Netcracker/qubership-graphite-remote-adapterremote-adapter/utils"
+	"github.com/Netcracker/qubership-graphite-remote-adapter/utils"
 )
 
 // make it mockable in tests

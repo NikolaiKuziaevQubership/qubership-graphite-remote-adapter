@@ -14,11 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         component:
-          - name: qubership-prometheus-adapter-operator
+          - name: qubership-graphite-remote-adapter
             file: Dockerfile
-          - name: qubership-prometheus-adapter
-            file: Dockerfile
-            context: prometheus-adapter
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

@@ -26,10 +26,9 @@ import (
 	"syscall"
 	"time"
 
-	"graphite-remote-adapter/utils/lz4"
-
 	"github.com/Netcracker/qubership-graphite-remote-adapter/client/graphite/config"
 	gpaths "github.com/Netcracker/qubership-graphite-remote-adapter/client/graphite/paths"
+	"github.com/Netcracker/qubership-graphite-remote-adapter/utils/lz4"
 	"github.com/go-kit/log/level"
 	"github.com/prometheus/common/model"
 )
