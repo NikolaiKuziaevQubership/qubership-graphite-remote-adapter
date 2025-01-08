@@ -1,0 +1,57 @@
+# # Copyright 2024-2025 NetCracker Technology Corporation
+# #
+# # Licensed under the Apache License, Version 2.0 (the "License");
+# # you may not use this file except in compliance with the License.
+# # You may obtain a copy of the License at
+# #
+# #      http://www.apache.org/licenses/LICENSE-2.0
+# #
+# # Unless required by applicable law or agreed to in writing, software
+# # distributed under the License is distributed on an "AS IS" BASIS,
+# # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# # See the License for the specific language governing permissions and
+# # limitations under the License.
+#
+
+default_prefix: test.prefix.
+enable_tags: true
+openmetrics: true
+read:
+  url: greatGraphiteWebURL
+  max_point_delta: 5m
+write:
+  carbon_address: greatCarbonAddress
+  compress_type: lz4
+  lz4_preferences:
+    frame:
+      block_size: max256KB
+      block_mode: true
+      content_checksum: true
+      block_checksum: true
+    compression_level: 12
+    auto_flush: true
+    decompression_speed: true
+  carbon_transport: tcp
+  carbon_reconnect_interval: 2m
+  enable_paths_cache: true
+  paths_cache_ttl: 18m
+  paths_cache_purge_interval: 42m
+  template_data:
+    site_mapping:
+      eu-par: fr_eqx
+
+  rules:
+    - match:
+        owner: team-X
+      match_re:
+        service: ^(foo1|foo2|baz)$
+      template: 'great.graphite.path.host.{{.labels.owner}}.{{.labels.service}}{{if ne .labels.env "prod"}}.{{.labels.env}}{{end}}'
+      continue: true
+    - match:
+        owner: team-X
+        env:   prod
+      template: 'bla.bla.{{.labels.owner | escape}}.great.path'
+      continue: true
+    - match:
+        owner: team-Z
+      continue: false
