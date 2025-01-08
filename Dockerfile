@@ -27,7 +27,13 @@ RUN go mod download -x
 
 # Copy the go source
 COPY cmd/graphite-remote-adapter/main.go main.go
-COPY client config ui utils web ./
+COPY client/ client/
+COPY config/ config/
+COPY ui/ ui/
+COPY utils/ utils/
+COPY web/ web/
+
+RUN ls -la /workspace
 
 # Install LZ4 libraries to build
 RUN apt-get update \
@@ -43,8 +49,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Build
-RUN CGO_ENABLED=1 CC=gcc GOOS=linux GOARCH=amd64 go build \
-    -a -v -x -o /build/graphite-remote-adapter \
+RUN CGO_ENABLED=1 CC=gcc GOOS=linux GOARCH=amd64 GO111MODULE=on go build \
+    -v -o /build/graphite-remote-adapter \
     -gcflags all=-trimpath=${GOPATH} \
     -asmflags all=-trimpath=${GOPATH} \
     ./
