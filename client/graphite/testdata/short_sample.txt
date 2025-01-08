@@ -1,0 +1,1 @@
+test_metric1.b.c1.baz.qux1.d.e1.foo.bar1 1.000000 0

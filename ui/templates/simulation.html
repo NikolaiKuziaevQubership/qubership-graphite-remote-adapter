@@ -1,0 +1,44 @@
+<!--
+ # Copyright 2024-2025 NetCracker Technology Corporation
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #      http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+-->
+
+{{define "extra-head"}}
+    <script src="static/js/api.js"></script>
+{{end}}
+{{define "content"}}
+<h1>Simulation</h1>
+    <div class="row">
+        <div class="form-group col-12">
+            <fieldset>
+                <legend>Inputs</legend>
+                <textarea class="form-control" id="input" rows=10 placeholder='# Give a list of metrics using prometheus export format
+# All following line will works:
+
+http_requests_total{method="post",code="200"} 1027 1395066363000
+http_requests_total{method="post",code="200"} 1027
+http_requests_total 1027
+# Even comment lines from your /metrics'></textarea>
+                <br/>
+                <button type="button" class="btn btn-secondary" onclick="simulWrite()">Simulate write</button>
+            </fieldset>
+            <fieldset>
+                <legend>Outputs</legend>
+                <div id="outputs"></div>
+                <div id="error-msg"></div>
+            </fieldset>
+        </div>
+    </div>
+{{end}}
