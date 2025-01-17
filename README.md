@@ -1,9 +1,19 @@
-# Graphite Remote storage adapter
+# Qubership Graphite Remote Storage Adapter
 
 This is a read/write adapter that receives samples via Prometheus's remote write
 protocol and stores them in remote storage like Graphite.
 
-It is fork of [graphite_remote_adapter](https://github.com/criteo/graphite-remote-adapter)
+Initially it was a fork of [graphite_remote_adapter](https://github.com/criteo/graphite-remote-adapter).
+
+But next we did a lot of changes in it source code.
+
+## Differences from initial graphite-remote-adapter
+
+* Added LZ4 compression for Graphite protocol
+* Added performance fixes to improve performance
+* Added escaping symbols `;`, `~`, ` ` (space), `=` of label values to correct work with Graphite + ClickHouse stack
+* Added Helm chart to deploy this adapter in Kubernetes
+* Added Grafana dashboard to visualize self-metrics
 
 ## Throughput
 
@@ -27,13 +37,11 @@ storage, Alertmanager).
 Example:
 
 ```yaml
-
 externalLabels:
   cluster: test-cluster
   environment: test-environment
   project: development
   team: test_team`
-
 ```
 
 RemoteWriteSpec defines the remote_write configuration
@@ -43,13 +51,11 @@ send samples to a long term storage.
 Example:
 
 ```yaml
-
- remoteWrite:
-   - tlsConfig:
-       insecureSkipVerify: true
-     url: >-
-       https://url_for_remote_write/write
-
+remoteWrite:
+  - tlsConfig:
+      insecureSkipVerify: true
+    url: >-
+      https://url_for_remote_write/write
 ```
 
 ### LZ4 compression
@@ -74,29 +80,22 @@ additionalGraphiteConfig:
         decompression_speed: false
 ```
 
-`compress_type` field support `plain`, `lz4` and empty (means `plain`) values.
+Parameters:
 
-`lz4_preferences` contains parameters for lz4 streaming compression.
-
-`frame` - lz4 frame info.
-
-`frame.block_size` - the larger the block size, the (slightly) better the compression ratio.
-Larger blocks also increase memory usage on both compression and decompression sides.
-Supported values: max64KB, max256KB, max1MB, max4MB. Default: max64KB.
-
-`frame.block_mode` - linked blocks sharply reduce inefficiencies when using small blocks, they compress better.
-However, some LZ4 decoders are only compatible with independent blocks. Default - false, i.e. blocks are linked.
-
-`frame.content_checksum` - add a 32-bit checksum of frame's decompressed data. Default - false, i.e. disabled.
-
-`frame.block_checksum` -  each block followed by a checksum of block's compressed data. Default - false, i.e. disabled.
-
-`compression_level` - min value 3, max 12, default 9
-
-`auto_flush` - always flush; reduces usage of internal buffers. Default - `false`
-
-`decompression_speed` - parser favors decompression speed vs compression ratio.
-Works for high compression modes (compression_level >= 10) only.
+* `compress_type` field support `plain`, `lz4` and empty (means `plain`) values.
+* `lz4_preferences` contains parameters for lz4 streaming compression.
+* `frame` - lz4 frame info.
+* `frame.block_size` - the larger the block size, the (slightly) better the compression ratio.
+  Larger blocks also increase memory usage on both compression and decompression sides.
+  Supported values: max64KB, max256KB, max1MB, max4MB. Default: max64KB.
+* `frame.block_mode` - linked blocks sharply reduce inefficiencies when using small blocks, they compress better.
+  However, some LZ4 decoders are only compatible with independent blocks. Default - false, i.e. blocks are linked.
+* `frame.content_checksum` - add a 32-bit checksum of frame's decompressed data. Default - false, i.e. disabled.
+* `frame.block_checksum` -  each block followed by a checksum of block's compressed data. Default - false, i.e. disabled.
+* `compression_level` - min value 3, max 12, default 9
+* `auto_flush` - always flush; reduces usage of internal buffers. Default - `false`
+* `decompression_speed` - parser favors decompression speed vs compression ratio.
+  Works for high compression modes (compression_level >= 10) only.
 
 ## Metrics list
 

@@ -7,8 +7,8 @@
     * [Running](#running)
   * [Run graphite-remote-adapter](#run-graphite-remote-adapter)
     * [Run graphite-remote-adapter on local machine](#run-graphite-remote-adapter-on-local-machine)
-  * [Run test](#run-test)
-  * [Generate snappy compressed metric payload](#generate-snappy-compressed-metric-payload)
+    * [Run test](#run-test)
+    * [Generate snappy compressed metric payload](#generate-snappy-compressed-metric-payload)
 
 ## Requirements
 
@@ -77,17 +77,20 @@
 
 Example:
 
-``` bash
+1. Run container:
 
-1. docker run --rm -p 2003:2003 --name relay -v /etc/carbon-c-relay.conf:/etc/carbon-c-relay.conf:ro -v /tmp/metrics.txt:/tmp/metrics.txt %link to carbon relay artifact% -f /etc/carbon-c-relay.conf
+    ```bash
+    docker run --rm -p 2003:2003 --name relay -v /etc/carbon-c-relay.conf:/etc/carbon-c-relay.conf:ro -v /tmp/metrics.txt:/tmp/metrics.txt %link to carbon relay artifact% -f /etc/carbon-c-relay.conf
+    ```
 
-2. docker ps
-   
-Result:
- CONTAINER ID   IMAGE                                                                                                                 COMMAND                  CREATED         STATUS         PORTS                                       NAMES
- 5f80b9f5d4b3  carbon-c-relay:3.7.4-74193738_20240221-064349   "carbon-c-relay -f …"   7 seconds ago   Up 6 seconds   0.0.0.0:2003->2003/tcp, :::2003->2003/tcp   relay
+2. Check list of running containers:
 
-```
+    ```bash
+    $ docker ps
+
+    CONTAINER ID   IMAGE                                                                                                                 COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+    5f80b9f5d4b3  carbon-c-relay:3.7.4-74193738_20240221-064349   "carbon-c-relay -f …"   7 seconds ago   Up 6 seconds   0.0.0.0:2003->2003/tcp, :::2003->2003/tcp   relay
+    ```
 
 ## Run graphite-remote-adapter
 
@@ -139,7 +142,6 @@ It is to contain all metrics from [here](../../../client/graphite/testdata/sampl
 To add more TCs with diff snappy compressed metric payloads use this code for generating:
 
 ```go
-
 func GenerateCompression(t *testing.T) {
     var timeseries []prompb.TimeSeries
     for i := 1; i < 2; i++ {
