@@ -1,6 +1,6 @@
 ## Changes in graphite client
 
-There are several changes in graphirte-remote-adapter for ecaping tags in metrics:
+There are several changes in graphite-remote-adapter for escaping tags in metrics:
 
 In file `client/graphite/paths/write.go`
 
