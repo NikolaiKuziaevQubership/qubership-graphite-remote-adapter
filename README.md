@@ -5,7 +5,7 @@ protocol and stores them in remote storage like Graphite.
 
 Initially it was a fork of [graphite_remote_adapter](https://github.com/criteo/graphite-remote-adapter).
 
-But next we did a lot of changes in it source code.
+But after that, we made a lot of changes to its source code.
 
 ## Differences from initial graphite-remote-adapter
 
