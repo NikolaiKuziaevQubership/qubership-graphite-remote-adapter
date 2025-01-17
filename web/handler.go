@@ -177,6 +177,7 @@ func (h *Handler) healthy(w http.ResponseWriter, r *http.Request) {
 	defer h.lock.RUnlock()
 
 	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload")
 	_, _ = fmt.Fprintf(w, "OK")
 }
 
