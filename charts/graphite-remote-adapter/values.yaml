@@ -23,7 +23,12 @@ install: true
 name: graphite-remote-adapter
 
 ## A Docker image to deploy the graphite_remote_adapter.
-# image: ghcr.io/netcracker/graphite-remote-adapter:main
+#image: ghcr.io/netcracker/qubership-graphite-remote-adapter:main
+
+# Only pods which provide own keys can access the private registry.
+# Default: []
+#
+imagePullSecrets: []
 
 ## Number of created pods.
 # Type: integer

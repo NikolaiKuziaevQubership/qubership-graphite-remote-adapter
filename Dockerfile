@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Build the adapter binary
-FROM golang:1.23.4-bookworm AS builder
+FROM golang:1.22.11-alpine3.21 AS builder
 
 WORKDIR /workspace
 
@@ -36,17 +36,13 @@ COPY web/ web/
 RUN ls -la /workspace
 
 # Install LZ4 libraries to build
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+RUN apk add --upgrade \
         openssl \
-        gcc \
-        gcc-multilib \
         make \
-        # Dependencies for LZ4
+        build-base \
+        lz4-dev \
         lz4 \
-        liblz4-dev \
-        musl-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/cache/apk/*
 
 # Build
 RUN CGO_ENABLED=1 CC=gcc GOOS=linux GOARCH=amd64 GO111MODULE=on go build \
@@ -77,6 +73,3 @@ RUN apk add --upgrade \
 WORKDIR /graphite-remote-adapter
 
 USER ${USER_UID}
-
-ENTRYPOINT [ "/bin/graphite-remote-adapter" ]
-CMD [ "-graphite-address=localhost:2003" ]

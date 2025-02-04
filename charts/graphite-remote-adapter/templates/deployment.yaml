@@ -32,12 +32,12 @@ spec:
         app.kubernetes.io/name: {{ .Values.name }}
         app: {{ .Values.name }}
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/graphite_remote_adapter_configmap.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: {{ .Values.name }}
           image: {{ template "graphite_remote_adapter.image" . }}
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: config
               mountPath: /graphite-remote-adapter
@@ -49,6 +49,7 @@ spec:
             {{- end }}
           {{- end }}
           args:
+            - /bin/graphite-remote-adapter
             - '--config.file=/graphite-remote-adapter/additionalGraphiteConfig.yaml'
             - '--graphite.write.carbon-address={{ .Values.writeCarbonAddress }}'
             - '--graphite.write.carbon-transport=tcp'
@@ -67,6 +68,10 @@ spec:
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           terminationMessagePath: /dev/termination-log
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       volumes:
         - name: config
           configMap:
