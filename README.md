@@ -1,3 +1,5 @@
+[![Super-Linter](https://github.com/Netcracker/qubership-graphite-remote-adapter/actions/workflows/super-linter.yaml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 # Qubership Graphite Remote Storage Adapter
 
 This is a read/write adapter that receives samples via Prometheus's remote write
