@@ -70,3 +70,4 @@ function simulWrite() {
         success: handleSimulationResult
     });
 }
+
