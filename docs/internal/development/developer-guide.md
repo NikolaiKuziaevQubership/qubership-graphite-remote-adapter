@@ -108,12 +108,12 @@ Configure you environment to run graphite-remote-adapter:
     var DefaultConfig = Config{
         DefaultPrefix: "",
         EnableTags: false,
-            UseOpenMetricsFormat: false, 
+            UseOpenMetricsFormat: false,
             Write: WriteConfig{
-                CarbonAddress: ":2003", 
+                CarbonAddress: ":2003",
                 CompressType:  LZ4,
-            }, 
-        CarbonTransport: "tcp", 
+            },
+        CarbonTransport: "tcp",
         ...
    }
    ```
