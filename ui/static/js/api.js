@@ -52,7 +52,6 @@ function handleSimulationResult(result) {
 }
 
 /*eslint no-unused-vars: "warn"*/
-/*global function simulWrite*/
 function simulWrite() {
     let txt = $("#input").val();
     let lines = txt.split(/\n/);
