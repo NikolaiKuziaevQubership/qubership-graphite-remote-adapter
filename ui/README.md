@@ -1,4 +1,4 @@
-## The `ui` package
+# The `ui` package
 
 The `ui` package contains static files and templates used in the web UI. For
 easier distribution they are statically compiled into the Prometheus Remote

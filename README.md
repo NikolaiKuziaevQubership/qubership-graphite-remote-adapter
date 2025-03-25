@@ -13,7 +13,7 @@ But after that, we made a lot of changes to its source code.
 
 * Added LZ4 compression for Graphite protocol
 * Added performance fixes to improve performance
-* Added escaping symbols `;`, `~`, ` ` (space), `=` of label values to correct work with Graphite + ClickHouse stack
+* Added escaping symbols `;`, `~`, ' ' (space), `=` of label values to correct work with Graphite + ClickHouse stack
 * Added Helm chart to deploy this adapter in Kubernetes
 * Added Grafana dashboard to visualize self-metrics
 

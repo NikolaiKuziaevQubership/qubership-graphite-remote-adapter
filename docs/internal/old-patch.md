@@ -1,4 +1,4 @@
-## Changes in graphite client
+# Changes in graphite client
 
 There are several changes in graphite-remote-adapter for escaping tags in metrics:
 

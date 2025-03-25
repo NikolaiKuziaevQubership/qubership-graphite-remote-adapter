@@ -41,7 +41,7 @@ replicas: 1
 ## Ref: https://kubernetes.io/docs/user-guide/compute-resources/
 # Type: object
 # Mandatory: no
-resources: {}
+resources:
   limits:
     cpu: 200m
     memory: 200Mi
