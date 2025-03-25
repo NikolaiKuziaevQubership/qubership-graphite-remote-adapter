@@ -21,6 +21,7 @@ const regexpLabels = /([a-zA-Z_][a-zA-Z0-9_]*)\s?=\s?"([^"\\\\]*(?:\\.[^"\\\\]*)
 function parseLabels(metricName, rawLabelsStr) {
     let labels = {"__name__": metricName};
     if (rawLabelsStr !== undefined) {
+        /*eslint no-cond-assign: "warn"*/
         while (match = regexpLabels.exec(rawLabelsStr)) {
             labels[match[1]] = match[2];
         }
@@ -50,6 +51,7 @@ function handleSimulationResult(result) {
     $("#outputs").html(html);
 }
 
+/*eslint no-unused-vars: "warn"*/
 function simulWrite() {
     let txt = $("#input").val();
     let lines = txt.split(/\n/);
@@ -70,3 +72,4 @@ function simulWrite() {
         success: handleSimulationResult
     });
 }
+

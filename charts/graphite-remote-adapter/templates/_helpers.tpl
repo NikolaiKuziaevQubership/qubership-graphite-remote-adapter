@@ -9,3 +9,4 @@ Image can be found from default values .Values.image
     {{- print "ghcr.io/netcracker/qubership-graphite-remote-adapter:main" -}}
   {{- end -}}
 {{- end -}}
+

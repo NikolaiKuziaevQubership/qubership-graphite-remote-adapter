@@ -1,5 +1,7 @@
 # Qubership Graphite Remote Storage Adapter
 
+[![Super-Linter](https://github.com/Netcracker/qubership-graphite-remote-adapter/actions/workflows/super-linter.yaml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 This is a read/write adapter that receives samples via Prometheus's remote write
 protocol and stores them in remote storage like Graphite.
 
@@ -11,7 +13,7 @@ But after that, we made a lot of changes to its source code.
 
 * Added LZ4 compression for Graphite protocol
 * Added performance fixes to improve performance
-* Added escaping symbols `;`, `~`, ` ` (space), `=` of label values to correct work with Graphite + ClickHouse stack
+* Added escaping symbols `;`, `~`, ' ' (space), `=` of label values to correct work with Graphite + ClickHouse stack
 * Added Helm chart to deploy this adapter in Kubernetes
 * Added Grafana dashboard to visualize self-metrics
 
