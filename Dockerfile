@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Build the adapter binary
-FROM golang:1.22.11-alpine3.21 AS builder
+FROM golang:1.23-alpine3.21 AS builder
 
 WORKDIR /workspace
 
@@ -26,7 +26,7 @@ COPY go.sum go.sum
 RUN go mod download -x
 
 # Copy the go source
-COPY cmd/graphite-remote-adapter/main.go main.go
+COPY main.go main.go
 COPY client/ client/
 COPY config/ config/
 COPY ui/ ui/
