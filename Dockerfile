@@ -36,13 +36,12 @@ COPY web/ web/
 RUN ls -la /workspace
 
 # Install LZ4 libraries to build
-RUN apk add --upgrade \
-        openssl \
-        make \
-        build-base \
-        lz4-dev \
-        lz4 \
-    && rm -rf /var/cache/apk/*
+RUN apk add --no-cache \
+        openssl=3.3.3-r0 \
+        make=4.4.1-r2 \
+        build-base=0.5-r3 \
+        lz4-dev=1.10.0-r0 \
+        lz4=1.10.0-r0
 
 # Build
 RUN CGO_ENABLED=1 CC=gcc GOOS=linux GOARCH=amd64 GO111MODULE=on go build \
@@ -66,9 +65,7 @@ RUN chmod +x /bin/graphite-remote-adapter \
     && addgroup ${GROUP_NAME} \
     && adduser -D -G ${GROUP_NAME} -u ${USER_UID} ${USER_NAME}
 
-RUN apk add --upgrade \
-        lz4-libs \
-    && rm -rf /var/cache/apk/*
+RUN apk add --no-cache lz4-libs=1.10.0-r0
 
 WORKDIR /graphite-remote-adapter
 
