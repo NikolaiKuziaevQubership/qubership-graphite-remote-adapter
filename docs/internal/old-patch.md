@@ -100,7 +100,7 @@ func EscapeTagged(tv string) string {
 }
 ```
 
-And in `cmd/graphite-remote-adapter/main.go` for extending logs:
+And in `main.go` for extending logs:
 
 ```go
  func main() {
