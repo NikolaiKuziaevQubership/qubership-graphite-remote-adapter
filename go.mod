@@ -1,6 +1,7 @@
 module github.com/Netcracker/qubership-graphite-remote-adapter
 
-go 1.21
+go 1.23.0
+
 toolchain go1.24.1
 
 require (
@@ -17,7 +18,7 @@ require (
 	github.com/prometheus/client_golang v1.20.5
 	github.com/prometheus/common v0.61.0
 	github.com/prometheus/prometheus v1.8.2-0.20210827082440-752c4f11ae86
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.1
 	go.uber.org/automaxprocs v1.6.0
 	golang.org/x/net v0.36.0
 	gopkg.in/yaml.v3 v3.0.1
